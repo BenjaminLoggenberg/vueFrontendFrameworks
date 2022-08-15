@@ -9,32 +9,41 @@
 </head>
 
 <body>
-    <script src="https://unpkg.com/vue"></script>
 
     <section id="assignment">
         <!-- 1) Fetch the user input and use it as a CSS class -->
         <!-- The entered class should be added to the below paragraph -->
-        <input type="text" />
+        <input type="text" id="input" v-model="myModel">
         <!-- (available classes: "user1", "user2") -->
-        <p>
+        <p id="styled" v-show="toggle">
             Style me!
         </p>
-        <button>Toggle Paragraph</button>
+        <button @click='toggle = !toggle'>Toggle Paragraph</button>
         <!-- 2) Use the "visible" and "hidden" classes to show/ hide the above paragraph -->
         <!-- Clicking the button should toggle between the two options -->
         <!-- 3) Add dynamic inline styling to the below paragraph and let the user enter a background-color -->
         <input type="text" />
         <p>Style me inline!</p>
     </section>
+    <script src="https://unpkg.com/vue"></script>
 
     <script>
-        let myVue = new Vue() {
+        let domInput = document.getElementById("input").value;
+        let myVue = new Vue({
             el: "#assignment",
             data: {
-                title: 
-                
-            }
-        }
+                title: "",
+                style: domInput,
+                myModel: "",
+                return {
+                    toggle: true
+                }
+            },
+        })
+        document.getElementById("styled").classList.add(style);
+
+
+
     </script>
 </body>
 
