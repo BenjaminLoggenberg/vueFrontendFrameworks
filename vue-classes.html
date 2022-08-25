@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://unpkg.com/vue@3"></script>
+
 </head>
 
 <body>
@@ -13,36 +15,42 @@
     <section id="assignment">
         <!-- 1) Fetch the user input and use it as a CSS class -->
         <!-- The entered class should be added to the below paragraph -->
-        <input type="text" id="input" v-model="myModel">
+        <input type="text" v-model="myModel">
         <!-- (available classes: "user1", "user2") -->
-        <p id="styled" v-show="toggle">
+        <p id="styled" v-if="visible">
             Style me!
         </p>
-        <button @click='toggle = !toggle'>Toggle Paragraph</button>
+        <button @click="toggle">Toggle Paragraph</button>
         <!-- 2) Use the "visible" and "hidden" classes to show/ hide the above paragraph -->
         <!-- Clicking the button should toggle between the two options -->
         <!-- 3) Add dynamic inline styling to the below paragraph and let the user enter a background-color -->
-        <input type="text" />
+        <input type="text">
         <p>Style me inline!</p>
     </section>
-    <script src="https://unpkg.com/vue"></script>
 
     <script>
-        let domInput = document.getElementById("input").value;
-        let myVue = new Vue({
-            el: "#assignment",
-            data: {
-                title: "",
-                style: domInput,
-                myModel: "",
+
+        const { createApp } = Vue
+
+        createApp({
+            data() {
                 return {
-                    toggle: true
+                    myModel: '',
+                    visible: true,
                 }
             },
-        })
-        document.getElementById("styled").classList.add(style);
+            methods: {
+                toggle() {
+                    this.visible !== this.visible
+                }
+            }
+        }).mount('#assignment')
 
+        document.getElementById("styled").innerHTML = createApp.$data.myModel;
 
+        // window.addEventListener('DOMContentLoaded', () => {
+        //     app.mount('#assignment');
+        // })
 
     </script>
 </body>
